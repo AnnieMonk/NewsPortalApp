@@ -1,0 +1,33 @@
+﻿<div class="container-login100">
+    <div class="wrap-login100 p-b-160 p-t-50">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login100-form">
+            <span class="login100-form-title p-b-43">
+                Account Login
+            </span>
+            <div class="form-group wrap-input100 rs1" >
+                <input type="text" formControlName="username" class="form-control input100" [ngClass]="{ 'is-invalid': submitted && formFields.username.errors }" />
+                <span class="label-input100">Username</span>
+                <div *ngIf="submitted && formFields.username.errors" style="border-top-left-radius: 12px;" class="validate-input">
+                    <div *ngIf="formFields.username.errors.required">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group wrap-input100 rs2">
+                <input type="password" formControlName="password" class="form-control input100" [ngClass]="{ 'is-invalid': submitted && formFields.password.errors }" />
+                <span class="label-input100">Password</span>
+                <div *ngIf="submitted && formFields.password.errors" style="border-top-right-radius: 12px;" class="validate-input">
+                    <div *ngIf="formFields.password.errors.required" >Password is required</div>
+                </div>
+            </div>
+            <div class="form-group container-login100-form-btn">
+                <button class="btn btn-primary login100-form-btn">Login</button>
+            </div>
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+

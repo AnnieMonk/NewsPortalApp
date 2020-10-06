@@ -1,0 +1,19 @@
+<ng-container *ngIf="(singlePost$ | async) as singlePost; else loading" >
+  
+  <div class="card bg-light mb-3" style="margin: auto; width: 50%; margin-top: 5%;">
+    <div class="card-header">
+      {{ singlePost.publishDate | date:"MM/dd/yyyy 'at' h:mma"}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ singlePost.title }}</h5>
+      <p class="card-text">{{ singlePost.content }}</p>
+      <p class="card-text"><small class="text-muted">Created by user {{ singlePost.account.username }}</small></p>
+    </div>
+  </div>
+  <div class="container-login100-form-btn" style="width: 50% !important; margin:auto;">
+    <button class="login100-form-btn" (click)="cancel()">
+      Back
+    </button>
+  </div>
+  </ng-container>
+  <ng-template #loading>Loading…</ng-template>

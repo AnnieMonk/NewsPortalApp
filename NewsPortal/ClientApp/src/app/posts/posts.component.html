@@ -1,0 +1,54 @@
+
+<p *ngIf="!(newsPosts$ | async)"><em>Loading...</em></p>
+
+<div style="display: inline-block; margin-top: 5%;">
+  <img src="https://img.icons8.com/doodle/192/000000/news.png" style="float: left;"/>
+  <h1 style="font-family:'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif, cursive; font-style:italic; color:white; margin-top: 10%; float: right; vertical-align: center;">Softray Solutions news portal</h1>
+</div>
+
+
+
+<div>
+
+  
+  <p *ngIf="isLogged()">
+    <a [routerLink]="['/add']" id="NewPostButton" class="btn btn-light float-left mb-3" style="display: block !important; color: black;"><img src="https://img.icons8.com/dusk/30/000000/plus-math.png"/>New post</a>
+  </p>
+  <input type="text" class="form-control float-right mb-3" style="width:15%;" placeholder="Search here..." [(ngModel)]="term"> 
+</div>
+  
+  <table class="table table-hover table-light table-curved" style="text-align: center; border-radius: 20px ;" *ngIf="(newsPosts$ | async)?.length>0">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Creator</th>
+        <th>Date</th>
+        <th *ngIf="isLogged()">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let newsPost of (newsPosts$ | async) | filter:term">
+        <td><a [routerLink]="['/singlepost/', newsPost.postId]">{{ newsPost.title }}</a></td>
+        <td>{{ newsPost.account.username }}</td>
+        <td>{{ newsPost.publishDate | date: "dd.MM.y" }}</td>
+        <td *ngIf="isLogged()" ><a [routerLink]="['/singlepost/edit/', newsPost.postId]" id="EditButton" class="btn btn-dark btn-sm" style="margin-right: 5px; width: 47%;">Edit</a>
+        <a [routerLink]="" (click)="delete(newsPost.postId)" id="DeleteButton" class="btn btn-dark btn-sm" style="width: 50%;" >Delete</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<div style="position: relative;">
+ 
+  <p *ngIf="isLogged()" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, cursive; color: white;" class="float-left mb3"><i>Welcome {{username}} !</i></p>
+  <p *ngIf="!isLogged()"> 
+    <a [routerLink]="['/login']"  id="LoginButton" class="float-left mb-3" style="margin-left: 5px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, cursive; color: powderblue;">Login</a>
+  </p>
+  <p *ngIf="isLogged()" s>
+    <a [routerLink]="" id="LogoutButton" (click)="logOut()" class="float-left mb-3" style="margin-left: 5px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, cursive; color: powderblue;">Logout</a>
+  </p>
+
+</div>
+ 
+

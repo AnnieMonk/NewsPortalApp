@@ -1,0 +1,28 @@
+<div style="margin:auto; width:50%; margin-top: 5%;">
+  <div class="alert alert-secondary" role="alert">
+    <h4 class="alert-heading">What are you going to write about today?</h4>
+    
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate >
+    <div class="form-group row">
+      <div class="col-md-12">
+        <input class="form-control" type="text" formControlName="title" placeholder="Title">
+      </div>
+      <span class="text-danger ml-3" *ngIf="title?.invalid && formDir.submitted">
+        Title is required.
+      </span>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <textarea class="form-control" rows="15" formControlName="content" placeholder="Write your article..."></textarea>
+      </div>
+      <span class="text-danger ml-3" *ngIf="content?.invalid && formDir.submitted">
+        Body is required.
+      </span>
+    </div>
+    <div class="form-group" style="display: inline-block; width: 100%;">
+      <button type="submit" class="login100-form-btn float-right" style="width: 50% !important;">Save</button>
+      <button class="login100-form-btn float-right" style="width: 49% !important; margin-right: 5px;" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
